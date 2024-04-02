@@ -1,0 +1,70 @@
+/* FormAddMovie.module.css */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.poster {
+    margin-right: 20px;
+    flex: 0 0 100%;
+    margin-bottom: 20px;
+}
+
+.poster img {
+    border-radius: 50px;
+    max-width: 467px;
+    height: 424px;
+}
+
+.form {
+    flex-grow: 1;
+    max-width: 400px;
+}
+
+.form h2 {
+    color: #06D6A0;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.formGroup input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.submitButton {
+    background-color: #06D6A0;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submitButton:hover {
+    background-color: #04a579;
+}
+
+@media screen and (min-width: 768px) {
+    .poster {
+        flex: 0 0 calc(50% - 10px);
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
+
+    .form {
+        max-width: calc(50% - 10px);
+    }
+}

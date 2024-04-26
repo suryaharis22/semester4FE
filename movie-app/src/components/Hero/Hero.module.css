@@ -67,22 +67,18 @@
     .hero__right {
         flex-basis: 60%;
         margin-left: 2rem;
-        /* Tambahkan margin kiri agar ada jarak antara kolom */
     }
 
     .hero__title {
         font-size: 2.2rem;
-        /* Kurangi ukuran font untuk judul */
     }
 
     .hero__genre {
         font-size: 1.3rem;
-        /* Kurangi ukuran font untuk genre */
     }
 
     .hero__description {
         font-size: 1.1rem;
-        /* Kurangi ukuran font untuk deskripsi */
     }
 }
 

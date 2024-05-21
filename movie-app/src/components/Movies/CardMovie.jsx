@@ -5,7 +5,7 @@ const CardMovie = (movie) => {
         <div className={styles.movie}>
             <img
                 className={styles.movie__image}
-                src="https://picsum.photos/300/400"
+                src={movie.data.poster}
                 alt="Movie"
             />
             <h3 className={styles.movie__title}>{movie.data.title}</h3>

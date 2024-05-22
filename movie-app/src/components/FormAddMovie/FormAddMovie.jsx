@@ -1,4 +1,3 @@
-// FormAddMovie.jsx
 import { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 import styles from './FormAddMovie.module.css';
@@ -6,51 +5,72 @@ import AlertSpan from '../Alert/AlertSpan';
 
 const FormAddMovie = (props) => {
     const { movies, setMovie } = props;
-    const [title, setTitle] = useState('');
-    const [date, setDate] = useState('');
-    const [posterUrl, setPosterUrl] = useState('');
-    const [movieType, setMovieType] = useState('Action');
-    const [titleError, setTitleError] = useState(false);
-    const [dateError, setDateError] = useState(false);
+    const [formData, setFormData] = useState({
+        title: '',
+        date: '',
+        posterUrl: '',
+        movieType: 'Action',
+    });
+    const [formErrors, setFormErrors] = useState({
+        title: false,
+        date: false,
+        posterUrl: false,
+    });
 
-    const handleTitleChange = (event) => {
-        setTitle(event.target.value);
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({ ...formData, [name]: value });
+        setFormErrors({ ...formErrors, [name]: false });
     };
 
-    const handleDateChange = (event) => {
-        setDate(event.target.value);
+    const validateForm = () => {
+        const errors = {};
+        let isValid = true;
+
+        if (formData.title === '') {
+            errors.title = true;
+            isValid = false;
+        }
+        if (formData.date === '') {
+            errors.date = true;
+            isValid = false;
+        }
+        if (formData.posterUrl === '') {
+            errors.posterUrl = true;
+            isValid = false;
+        }
+
+        setFormErrors(errors);
+        return isValid;
     };
 
-    const handlePosterUrlChange = (event) => {
-        setPosterUrl(event.target.value);
-    };
+    const AddMovie = () => {
+        const movie = {
+            id: nanoid(),
+            title: formData.title,
+            date: formData.date,
+            poster: formData.posterUrl || "https://picsum.photos/300/400",
+            type: formData.movieType,
+        };
 
-    const handleMovieTypeChange = (event) => {
-        setMovieType(event.target.value);
+        setMovie([...movies, movie]);
+        setFormData({
+            title: '',
+            date: '',
+            posterUrl: '',
+            movieType: 'Action',
+        });
+        setFormErrors({
+            title: false,
+            date: false,
+            posterUrl: false,
+        });
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (title === '') {
-            setTitleError(true);
-        } else if (date === '') {
-            setDateError(true);
-        } else {
-            const movie = {
-                id: nanoid(),
-                title: title,
-                date: date,
-                poster: posterUrl || "https://picsum.photos/300/400",
-                type: movieType,
-            };
-
-            setMovie([...movies, movie]);
-            setTitle('');
-            setDate('');
-            setPosterUrl('');
-            setMovieType('Action');
-            setTitleError(false);
-            setDateError(false);
+        if (validateForm()) {
+            AddMovie();
         }
     };
 
@@ -61,7 +81,7 @@ const FormAddMovie = (props) => {
     return (
         <div className={styles.container}>
             <div className={styles.poster}>
-                <img src={posterUrl || "https://picsum.photos/535/354"} alt="Poster" />
+                <img src={formData.posterUrl || "https://picsum.photos/535/354"} alt="Poster" />
             </div>
             <div className={styles.form}>
                 <h2>Add Movie</h2>
@@ -69,37 +89,42 @@ const FormAddMovie = (props) => {
                     <div className={styles.formGroup}>
                         <label>Title:</label>
                         <input
+                            id='title'
                             type="text"
-                            value={title}
-                            onChange={handleTitleChange}
-                            required
+                            value={formData.title}
+                            onChange={handleChange}
+                            name='title'
                         />
                     </div>
-                    {titleError && <AlertSpan>Title is required</AlertSpan>}
+                    {formErrors.title && <AlertSpan>Title is required</AlertSpan>}
 
                     <div className={styles.formGroup}>
                         <label>Date:</label>
                         <input
+                            id='date'
                             type="text"
-                            value={date}
-                            onChange={handleDateChange}
-                            required
+                            value={formData.date}
+                            onChange={handleChange}
+                            name='date'
                         />
                     </div>
-                    {dateError && <AlertSpan>Date is required</AlertSpan>}
+                    {formErrors.date && <AlertSpan>Date is required</AlertSpan>}
 
                     <div className={styles.formGroup}>
                         <label>Poster URL:</label>
                         <input
+                            id='posterUrl'
                             type="text"
-                            value={posterUrl}
-                            onChange={handlePosterUrlChange}
+                            value={formData.posterUrl}
+                            onChange={handleChange}
+                            name='posterUrl'
                         />
                     </div>
+                    {formErrors.posterUrl && <AlertSpan>Poster URL is required</AlertSpan>}
 
                     <div className={styles.formGroup}>
                         <label>Movie Type:</label>
-                        <select value={movieType} onChange={handleMovieTypeChange}>
+                        <select value={formData.movieType} onChange={handleChange} name='movieType' id='movieType'>
                             <option value="Action">Action</option>
                             <option value="Drama">Drama</option>
                             <option value="Horror">Horror</option>

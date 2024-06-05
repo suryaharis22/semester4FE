@@ -17,12 +17,12 @@ const Navbar = () => {
                 <h1 href="#home" className={styles.active}>Movie App</h1>
             </div>
             <div className={styles.rightLinks}>
-                <Link to={'/'}>Home</Link>
-                <Link to={'/movie/about'}>About</Link>
-                <Link to={'/movie/add-movie'}>Add Movie</Link>
-                <Link to={'/movie/pouler'}>Populer</Link>
-                <Link to={'/movie/new-play'}>New Play</Link>
-                <Link to={'/movie/top-rated'}>Top Rated</Link>
+                <Link className={styles.navbar__item} to={'/'}>Home</Link>
+                <Link className={styles.navbar__item} to={'/movie/about'}>About</Link>
+                <Link className={styles.navbar__item} to={'/movie/add-movie'}>Add Movie</Link>
+                <Link className={styles.navbar__item} to={'/movie/pouler'}>Populer</Link>
+                <Link className={styles.navbar__item} to={'/movie/new-play'}>New Play</Link>
+                <Link className={styles.navbar__item} to={'/movie/top-rated'}>Top Rated</Link>
             </div>
             <a href="javascript:void(0);" className={`${styles.icon} ${styles.rightIcon}`} onClick={toggleResponsive}>
                 <FontAwesomeIcon icon={faBars} />

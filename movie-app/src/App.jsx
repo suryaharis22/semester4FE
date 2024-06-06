@@ -8,21 +8,25 @@ import NewPlay from './Pages/NewPlay'
 import TopRated from './Pages/TopRated'
 import Layout from './Layout/Layout'
 import Counter from './Pages/Counter'
+import { ThemeProvider } from 'styled-components'
+import theme from './utils/theme'
 
 function App() {
 
   return (
-    <Layout>
-      <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/movie/about' element={<About />}></Route>
-        <Route path='/movie/add-movie' element={<AddMovie />}></Route>
-        <Route path='/movie/pouler' element={<Populer />}></Route>
-        <Route path='/movie/new-play' element={<NewPlay />}></Route>
-        <Route path='/movie/top-rated' element={<TopRated />}></Route>
-        <Route path='/movie/counter' element={<Counter />}></Route>
-      </Routes>
-    </Layout>
+    <ThemeProvider theme={theme}>
+      <Layout>
+        <Routes>
+          <Route path='/' element={<Home />}></Route>
+          <Route path='/movie/about' element={<About />}></Route>
+          <Route path='/movie/add-movie' element={<AddMovie />}></Route>
+          <Route path='/movie/pouler' element={<Populer />}></Route>
+          <Route path='/movie/new-play' element={<NewPlay />}></Route>
+          <Route path='/movie/top-rated' element={<TopRated />}></Route>
+          <Route path='/movie/counter' element={<Counter />}></Route>
+        </Routes>
+      </Layout>
+    </ThemeProvider>
   )
 }
 

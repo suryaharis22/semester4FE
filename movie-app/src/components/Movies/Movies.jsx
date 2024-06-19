@@ -17,10 +17,6 @@ const Movies = (props) => {
     const { movies, setListMovies } = props;
 
     console.log('movies', movies);
-
-
-
-
     return (
         <div className={styles.container}>
             <section className={styles.movies}>

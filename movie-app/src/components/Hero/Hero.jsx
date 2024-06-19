@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
-import styles from './Hero.module.css'
 import axios from 'axios';
 import Button from '../Button';
+import {
+    Container,
+    SectionHero,
+    HeroLeft,
+    HeroRight,
+    HeroTitle,
+    HeroGenre,
+    HeroDescription,
+    HeroImage
+} from './StyleHero';
 
 const Hero = () => {
     const [dataApi, setDataApi] = useState();
-
-    // useState(() => {
-    //     fetch('https://www.omdbapi.com/?apikey=fcf50ae6&i=tt2975590')
-    //         .then((response) => response.json())
-    //         .then((data) => setDataApi(data));
-    // }, []);
 
     useEffect(() => {
         axios.get('https://www.omdbapi.com/?apikey=fcf50ae6&i=tt2975590')
@@ -24,22 +27,19 @@ const Hero = () => {
     }, []);
 
     return (
-        <div className={styles.container}>
-            <section className={styles.hero}>
-                <div className={styles.hero__left}>
-                    <h2 className={styles.hero__title}>{dataApi?.Title}</h2>
-                    <h3 className={styles.hero__genre}>Genre: {dataApi?.Genre}</h3>
-                    <p className={styles.hero__description}>{`${dataApi?.Plot}`}</p>
-                    <Button variant="primary" text="Watch" full>Watch</Button>
-                    {/* <button className={styles.hero__button}>Watch</button> */}
-                </div>
-                <div className={styles.hero__right}>
-                    <img className={styles.hero__image}
-                        src={`${dataApi?.Poster}`}
-                        alt="placeholder" />
-                </div>
-            </section>
-        </div>
+        <Container>
+            <SectionHero>
+                <HeroLeft>
+                    <HeroTitle>{dataApi?.Title}</HeroTitle>
+                    <HeroGenre>Genre: {dataApi?.Genre}</HeroGenre>
+                    <HeroDescription>{`${dataApi?.Plot}`}</HeroDescription>
+                    <Button variant="success" size="full">Watch</Button>
+                </HeroLeft>
+                <HeroRight>
+                    <HeroImage src={`${dataApi?.Poster}`} alt="placeholder" />
+                </HeroRight>
+            </SectionHero>
+        </Container>
     );
 }
 

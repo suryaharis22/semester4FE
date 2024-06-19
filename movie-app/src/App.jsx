@@ -1,3 +1,4 @@
+// src/App.jsx
 // import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Home from './Pages/Home'
@@ -10,11 +11,13 @@ import Layout from './Layout/Layout'
 import Counter from './Pages/Counter'
 import { ThemeProvider } from 'styled-components'
 import theme from './utils/theme'
+import GlobalStyle from './components/GlobalStyle'
 
 function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <Layout>
         <Routes>
           <Route path='/' element={<Home />}></Route>

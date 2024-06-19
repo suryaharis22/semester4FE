@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import styles from './Navbar.module.css'; // Import stylesheet
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Icon, LeftLinks, NavbarContainer, NavbarItem, NavbarTitle, RightLinks } from './StyleNavbar';
+
 
 const Navbar = () => {
     const [responsive, setResponsive] = useState(false);
@@ -12,23 +12,23 @@ const Navbar = () => {
     };
 
     return (
-        <div className={`${styles.topnav} ${responsive ? styles.responsive : ''}`} id="myTopnav">
-            <div className={styles.leftLinks}>
-                <h1 href="#home" className={styles.active}>Movie App</h1>
-            </div>
-            <div className={styles.rightLinks}>
-                <Link className={styles.navbar__item} to={'/'}>Home</Link>
-                <Link className={styles.navbar__item} to={'/movie/about'}>About</Link>
-                <Link className={styles.navbar__item} to={'/movie/add-movie'}>Add Movie</Link>
-                <Link className={styles.navbar__item} to={'/movie/pouler'}>Populer</Link>
-                <Link className={styles.navbar__item} to={'/movie/new-play'}>New Play</Link>
-                <Link className={styles.navbar__item} to={'/movie/top-rated'}>Top Rated</Link>
-            </div>
-            <a href="javascript:void(0);" className={`${styles.icon} ${styles.rightIcon}`} onClick={toggleResponsive}>
+        <NavbarContainer className={responsive ? 'responsive' : ''}>
+            <LeftLinks>
+                <NavbarTitle className="active">Movie App</NavbarTitle>
+            </LeftLinks>
+            <RightLinks className={responsive ? 'responsive' : ''}>
+                <NavbarItem to="/">Home</NavbarItem>
+                <NavbarItem to="/movie/about">About</NavbarItem>
+                <NavbarItem to="/movie/add-movie">Add Movie</NavbarItem>
+                <NavbarItem to="/movie/pouler">Populer</NavbarItem>
+                <NavbarItem to="/movie/new-play">New Play</NavbarItem>
+                <NavbarItem to="/movie/top-rated">Top Rated</NavbarItem>
+            </RightLinks>
+            <Icon className="icon" onClick={toggleResponsive}>
                 <FontAwesomeIcon icon={faBars} />
-            </a>
-        </div>
+            </Icon>
+        </NavbarContainer>
     );
-}
+};
 
 export default Navbar;

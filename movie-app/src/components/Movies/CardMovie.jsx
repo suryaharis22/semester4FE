@@ -1,16 +1,16 @@
 import styles from './Movies.module.css'
+import StyleMovie from './StyleMovie';
 const CardMovie = (movie) => {
     return (
 
-        <div className={styles.movie}>
+        <StyleMovie>
             <img
-                className={styles.movie__image}
-                src={movie.data.poster}
+                src={movie.data.poster || `${import.meta.env.VITE_IMAGE}/${movie.data.poster_path}`}
                 alt="Movie"
             />
-            <h3 className={styles.movie__title}>{movie.data.title}</h3>
-            <p className={styles.movie__date}>{movie.data.date}</p>
-        </div>
+            <h3 >{movie.data.title}</h3>
+            <p >{new Date(movie.data.release_date).getFullYear()}</p>
+        </StyleMovie>
 
     );
 }

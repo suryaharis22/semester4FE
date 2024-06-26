@@ -3,6 +3,8 @@ import styled, { css } from "styled-components";
 
 const Button = styled.button`
 background-color: ${props => props.theme.colors[props.variant] || props.theme.colors.primary};
+text-align: center;
+text-decoration: none;
 ${props => props.theme.size[props.size] || props.theme.size.md};
 border: none;
 color: #fff;

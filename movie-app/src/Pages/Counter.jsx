@@ -7,9 +7,7 @@ const Counter = () => {
     const add = () => {
         setAngka(angka + 1);
     }
-    useEffect(() => {
-        console.log("angka", angka);
-    }, [angka])
+
     console.log('render');
     return (
         <div className="">

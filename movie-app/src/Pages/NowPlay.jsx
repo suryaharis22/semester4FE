@@ -4,18 +4,18 @@ import Movies from '../components/Movies/Movies';
 import Hero from '../components/Hero/Hero';
 import { ENDPOINTS } from '../utils/endpoints';
 
-const TopRated = () => {
+const NowPlay = () => {
     const [movies, setMovies] = useState([]);
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(1); // Track the current page
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        getMovie(page);
-    }, [page]);
+        getMovie(page); // Fetch movies for the current page
+    }, [page]); // Fetch movies again when page changes
 
     const getMovie = async (page) => {
         try {
-            const response = await axios.get(ENDPOINTS.TOPRATED(page));
+            const response = await axios.get(ENDPOINTS.NOWPLAY(page)); // Pass the page parameter
             if (response.status === 200) {
                 setMovies(prevMovies => [...prevMovies, ...response.data.results]); // Append new movies to the existing list
             } else {
@@ -43,4 +43,4 @@ const TopRated = () => {
     );
 }
 
-export default TopRated;
+export default NowPlay;

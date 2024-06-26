@@ -21,7 +21,7 @@ const Navbar = () => {
                 <NavbarItem to="/movie/about">About</NavbarItem>
                 <NavbarItem to="/movie/add-movie">Add Movie</NavbarItem>
                 <NavbarItem to="/movie/pouler">Populer</NavbarItem>
-                <NavbarItem to="/movie/new-play">New Play</NavbarItem>
+                <NavbarItem to="/movie/new-play">Now Play</NavbarItem>
                 <NavbarItem to="/movie/top-rated">Top Rated</NavbarItem>
             </RightLinks>
             <Icon className="icon" onClick={toggleResponsive}>

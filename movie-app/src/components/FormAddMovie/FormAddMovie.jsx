@@ -76,7 +76,6 @@ const FormAddMovie = (props) => {
     };
 
     useEffect(() => {
-        console.log('movies', movies);
     }, [movies]);
 
     return (

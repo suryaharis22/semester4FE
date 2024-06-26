@@ -1,17 +1,18 @@
-import styles from './Movies.module.css'
+import { Link } from 'react-router-dom';
 import StyleMovie from './StyleMovie';
-const CardMovie = (movie) => {
+
+const CardMovie = ({ data }) => {
     return (
-
         <StyleMovie>
-            <img
-                src={movie.data.poster || `${import.meta.env.VITE_IMAGE}/${movie.data.poster_path}`}
-                alt="Movie"
-            />
-            <h3 >{movie.data.title}</h3>
-            <p >{new Date(movie.data.release_date).getFullYear()}</p>
+            <Link to={`/movie/${data.id}`}>
+                <img
+                    src={data.poster || `${import.meta.env.VITE_IMAGE}/${data.poster_path}`}
+                    alt="Movie"
+                />
+                <h3>{data.title}</h3>
+                <p>{new Date(data.release_date).getFullYear()}</p>
+            </Link>
         </StyleMovie>
-
     );
 }
 

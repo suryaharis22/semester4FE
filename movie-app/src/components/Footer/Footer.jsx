@@ -6,7 +6,7 @@ function Footer() {
         <StyleFooter >
             <footer >
                 <h2>Movie App</h2>
-                <p>Created by aufaroot18</p>
+                <p>Created by SuryaAzhar</p>
             </footer>
         </StyleFooter>
     );

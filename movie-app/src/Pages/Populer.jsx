@@ -1,37 +1,46 @@
+// src/Pages/Populer.jsx
+
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Movies from '../components/Movies/Movies';
 import Hero from '../components/Hero/Hero';
+import { ENDPOINTS } from '../utils/endpoints'; // Ensure ENDPOINTS is imported
 
 const Populer = () => {
-    const API_KEY = import.meta.env.VITE_APP_KEY; // Ensure the prefix is VITE_
     const [movies, setMovies] = useState([]);
+    const [page, setPage] = useState(1); // Track the current page
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        getMovie();
-    }, []);
+        getMovie(page); // Fetch movies for the current page
+    }, [page]); // Fetch movies again when page changes
 
-    const getMovie = async () => {
-        const response = await axios.get(`${import.meta.env.VITE_URL_API}movie/popular?api_key=${API_KEY}&language=en-US&page=1`);
-        if (response.status === 200) {
-            setMovies(response.data.results);
-        } else {
-            setError(response.status_message);
+    const getMovie = async (page) => {
+        try {
+            const response = await axios.get(ENDPOINTS.POPULAR(page)); // Pass the page parameter
+            if (response.status === 200) {
+                setMovies(prevMovies => [...prevMovies, ...response.data.results]); // Append new movies to the existing list
+            } else {
+                setError(response.status_message);
+            }
+        } catch (error) {
+            setError('Failed to fetch movies.');
         }
+    }
+
+    const loadMoreMovies = () => {
+        setPage(prevPage => prevPage + 1); // Increment the page number
     }
 
     return (
         <>
-
             {error ? <h1 style={{ textAlign: 'center' }}>{error}</h1> :
                 <>
                     <Hero />
-                    < Movies movies={movies} setMovie={setMovies} />
+                    <Movies movies={movies} setMovie={setMovies} Header={'Populer'} />
+                    <button onClick={loadMoreMovies} style={{ display: 'block', margin: '50px auto', padding: '10px 20px' }}>Load More</button>
                 </>
             }
-
-
         </>
     );
 }

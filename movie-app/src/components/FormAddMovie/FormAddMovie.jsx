@@ -1,11 +1,18 @@
-// src/components/FormAddMovie
-import { useEffect, useState } from 'react';
+// src/components/FormAddMovie/FormAddMovie.js
+import { useContext, useState } from 'react';
 import { nanoid } from 'nanoid';
-import styles from './FormAddMovie.module.css';
+import {
+    Container,
+    Poster,
+    Form,
+    FormGroup,
+    SubmitButton
+} from './StyleFormAddMovie';
 import AlertSpan from '../Alert/AlertSpan';
+import MovieContext from '../Context/MoviesContext';
 
-const FormAddMovie = (props) => {
-    const { movies, setMovie } = props;
+const FormAddMovie = () => {
+    const { movies, setMovies } = useContext(MovieContext);
     const [formData, setFormData] = useState({
         title: '',
         date: '',
@@ -45,8 +52,8 @@ const FormAddMovie = (props) => {
         return isValid;
     };
 
-    const AddMovie = () => {
-        const movie = {
+    const addMovie = () => {
+        const newMovie = {
             id: nanoid(),
             title: formData.title,
             date: formData.date,
@@ -54,7 +61,7 @@ const FormAddMovie = (props) => {
             type: formData.movieType,
         };
 
-        setMovie([...movies, movie]);
+        setMovies([...movies, newMovie]);
         setFormData({
             title: '',
             date: '',
@@ -71,23 +78,20 @@ const FormAddMovie = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         if (validateForm()) {
-            AddMovie();
+            addMovie();
         }
     };
 
-    useEffect(() => {
-    }, [movies]);
-
     return (
-        <div className={styles.container}>
-            <div className={styles.poster}>
+        <Container>
+            <Poster>
                 <img src={formData.posterUrl || "https://picsum.photos/535/354"} alt="Poster" />
-            </div>
-            <div className={styles.form}>
+            </Poster>
+            <Form>
                 <h2>Add Movie</h2>
                 <form onSubmit={handleSubmit}>
-                    <div className={styles.formGroup}>
-                        <label>Title:</label>
+                    <FormGroup>
+                        <label htmlFor='title'>Title:</label>
                         <input
                             id='title'
                             type="text"
@@ -95,11 +99,11 @@ const FormAddMovie = (props) => {
                             onChange={handleChange}
                             name='title'
                         />
-                    </div>
+                    </FormGroup>
                     {formErrors.title && <AlertSpan>Title is required</AlertSpan>}
 
-                    <div className={styles.formGroup}>
-                        <label>Date:</label>
+                    <FormGroup>
+                        <label htmlFor='date'>Date:</label>
                         <input
                             id='date'
                             type="text"
@@ -107,11 +111,11 @@ const FormAddMovie = (props) => {
                             onChange={handleChange}
                             name='date'
                         />
-                    </div>
+                    </FormGroup>
                     {formErrors.date && <AlertSpan>Date is required</AlertSpan>}
 
-                    <div className={styles.formGroup}>
-                        <label>Poster URL:</label>
+                    <FormGroup>
+                        <label htmlFor='posterUrl'>Poster URL:</label>
                         <input
                             id='posterUrl'
                             type="text"
@@ -119,23 +123,28 @@ const FormAddMovie = (props) => {
                             onChange={handleChange}
                             name='posterUrl'
                         />
-                    </div>
+                    </FormGroup>
                     {formErrors.posterUrl && <AlertSpan>Poster URL is required</AlertSpan>}
 
-                    <div className={styles.formGroup}>
-                        <label>Movie Type:</label>
-                        <select value={formData.movieType} onChange={handleChange} name='movieType' id='movieType'>
+                    <FormGroup>
+                        <label htmlFor='movieType'>Movie Type:</label>
+                        <select
+                            id='movieType'
+                            value={formData.movieType}
+                            onChange={handleChange}
+                            name='movieType'
+                        >
                             <option value="Action">Action</option>
                             <option value="Drama">Drama</option>
                             <option value="Horror">Horror</option>
                             <option value="Comedy">Comedy</option>
                         </select>
-                    </div>
+                    </FormGroup>
 
-                    <button type="submit" className={styles.submitButton}>Submit</button>
+                    <SubmitButton type="submit">Submit</SubmitButton>
                 </form>
-            </div>
-        </div>
+            </Form>
+        </Container>
     );
 };
 

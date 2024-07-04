@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Movies from '../components/Movies/Movies';
 import Hero from '../components/Hero/Hero';
 import { ENDPOINTS } from '../utils/endpoints';
+import MovieContext from '../components/Context/MoviesContext';
 
 const TopRated = () => {
-    const [movies, setMovies] = useState([]);
+    const { movies, setMovies } = useContext(MovieContext);
     const [page, setPage] = useState(1);
     const [error, setError] = useState(null);
 

@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import CardMovie from './CardMovie';
 import styles from './Movies.module.css';
+import MovieContext from '../Context/MoviesContext';
 
 const Movies = (props) => {
-    const { movies, setListMovies, Header } = props;
+    const { movies } = useContext(MovieContext);
+    const { setListMovies, Header } = props;
 
     return (
         <div className={styles.container}>

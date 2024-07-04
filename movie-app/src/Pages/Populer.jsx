@@ -1,13 +1,14 @@
 // src/Pages/Populer.jsx
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Movies from '../components/Movies/Movies';
 import Hero from '../components/Hero/Hero';
 import { ENDPOINTS } from '../utils/endpoints'; // Ensure ENDPOINTS is imported
+import MovieContext from '../components/Context/MoviesContext';
 
 const Populer = () => {
-    const [movies, setMovies] = useState([]);
+    const { movies, setMovies } = useContext(MovieContext);
     const [page, setPage] = useState(1); // Track the current page
     const [error, setError] = useState(null);
 
